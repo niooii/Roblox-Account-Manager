@@ -70,6 +70,9 @@ namespace RBX_Alt_Manager
             this.copyRbxplayerLinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyAppLinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HideUsernamesCheckbox = new System.Windows.Forms.CheckBox();
+            this.HbRestartCB = new System.Windows.Forms.CheckBox();
+            this.HbTimeoutNum = new System.Windows.Forms.NumericUpDown();
+            this.HbTimeoutLabel = new System.Windows.Forms.Label();
             this.BrowserButton = new System.Windows.Forms.Button();
             this.ArgumentsB = new System.Windows.Forms.Button();
             this.CurrentPlace = new System.Windows.Forms.Label();
@@ -120,6 +123,7 @@ namespace RBX_Alt_Manager
             this.PlaceID = new RBX_Alt_Manager.Classes.BorderedTextBox();
             this.AddAccountsStrip.SuspendLayout();
             this.AccountsStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.HbTimeoutNum)).BeginInit();
             this.OpenBrowserStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShuffleIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AccountsView)).BeginInit();
@@ -134,57 +138,60 @@ namespace RBX_Alt_Manager
             // 
             this.LabelJobID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelJobID.AutoSize = true;
-            this.LabelJobID.Location = new System.Drawing.Point(600, 27);
+            this.LabelJobID.Location = new System.Drawing.Point(800, 33);
+            this.LabelJobID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelJobID.Name = "LabelJobID";
-            this.LabelJobID.Size = new System.Drawing.Size(38, 13);
+            this.LabelJobID.Size = new System.Drawing.Size(46, 16);
             this.LabelJobID.TabIndex = 1000;
             this.LabelJobID.Text = "Job ID";
             this.SaveTooltip.SetToolTip(this.LabelJobID, "Job ID is a unique ID assigned to every roblox server.");
             // 
             // AddAccountsStrip
             // 
+            this.AddAccountsStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.AddAccountsStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manualToolStripMenuItem,
             this.bulkUserPassToolStripMenuItem,
             this.byCookieToolStripMenuItem,
             this.customURLJSToolStripMenuItem});
             this.AddAccountsStrip.Name = "AddAccountsStrip";
-            this.AddAccountsStrip.Size = new System.Drawing.Size(173, 92);
+            this.AddAccountsStrip.Size = new System.Drawing.Size(200, 100);
             // 
             // manualToolStripMenuItem
             // 
             this.manualToolStripMenuItem.Name = "manualToolStripMenuItem";
-            this.manualToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.manualToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
             this.manualToolStripMenuItem.Text = "Manual Login";
             this.manualToolStripMenuItem.Click += new System.EventHandler(this.manualToolStripMenuItem_Click);
             // 
             // bulkUserPassToolStripMenuItem
             // 
             this.bulkUserPassToolStripMenuItem.Name = "bulkUserPassToolStripMenuItem";
-            this.bulkUserPassToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.bulkUserPassToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
             this.bulkUserPassToolStripMenuItem.Text = "User:Pass";
             this.bulkUserPassToolStripMenuItem.Click += new System.EventHandler(this.bulkUserPassToolStripMenuItem_Click);
             // 
             // byCookieToolStripMenuItem
             // 
             this.byCookieToolStripMenuItem.Name = "byCookieToolStripMenuItem";
-            this.byCookieToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.byCookieToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
             this.byCookieToolStripMenuItem.Text = "Cookie(s)";
             this.byCookieToolStripMenuItem.Click += new System.EventHandler(this.byCookieToolStripMenuItem_Click);
             // 
             // customURLJSToolStripMenuItem
             // 
             this.customURLJSToolStripMenuItem.Name = "customURLJSToolStripMenuItem";
-            this.customURLJSToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.customURLJSToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
             this.customURLJSToolStripMenuItem.Text = "Custom (URL + JS)";
             this.customURLJSToolStripMenuItem.Click += new System.EventHandler(this.customURLJSToolStripMenuItem_Click);
             // 
             // Remove
             // 
             this.Remove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Remove.Location = new System.Drawing.Point(114, 266);
+            this.Remove.Location = new System.Drawing.Point(152, 327);
+            this.Remove.Margin = new System.Windows.Forms.Padding(4);
             this.Remove.Name = "Remove";
-            this.Remove.Size = new System.Drawing.Size(95, 23);
+            this.Remove.Size = new System.Drawing.Size(127, 28);
             this.Remove.TabIndex = 15;
             this.Remove.Text = "Remove";
             this.Remove.UseVisualStyleBackColor = true;
@@ -193,9 +200,10 @@ namespace RBX_Alt_Manager
             // JoinServer
             // 
             this.JoinServer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.JoinServer.Location = new System.Drawing.Point(503, 67);
+            this.JoinServer.Location = new System.Drawing.Point(671, 82);
+            this.JoinServer.Margin = new System.Windows.Forms.Padding(4);
             this.JoinServer.Name = "JoinServer";
-            this.JoinServer.Size = new System.Drawing.Size(198, 23);
+            this.JoinServer.Size = new System.Drawing.Size(264, 28);
             this.JoinServer.TabIndex = 4;
             this.JoinServer.Text = "Join Server";
             this.JoinServer.UseVisualStyleBackColor = true;
@@ -204,9 +212,10 @@ namespace RBX_Alt_Manager
             // SetDescription
             // 
             this.SetDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SetDescription.Location = new System.Drawing.Point(503, 236);
+            this.SetDescription.Location = new System.Drawing.Point(671, 338);
+            this.SetDescription.Margin = new System.Windows.Forms.Padding(4);
             this.SetDescription.Name = "SetDescription";
-            this.SetDescription.Size = new System.Drawing.Size(133, 23);
+            this.SetDescription.Size = new System.Drawing.Size(177, 28);
             this.SetDescription.TabIndex = 12;
             this.SetDescription.Text = "Set Description";
             this.SetDescription.UseVisualStyleBackColor = true;
@@ -215,9 +224,10 @@ namespace RBX_Alt_Manager
             // SetAlias
             // 
             this.SetAlias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SetAlias.Location = new System.Drawing.Point(707, 122);
+            this.SetAlias.Location = new System.Drawing.Point(943, 176);
+            this.SetAlias.Margin = new System.Windows.Forms.Padding(4);
             this.SetAlias.Name = "SetAlias";
-            this.SetAlias.Size = new System.Drawing.Size(65, 23);
+            this.SetAlias.Size = new System.Drawing.Size(87, 28);
             this.SetAlias.TabIndex = 10;
             this.SetAlias.Text = "Set Alias";
             this.SetAlias.UseVisualStyleBackColor = true;
@@ -226,9 +236,10 @@ namespace RBX_Alt_Manager
             // Follow
             // 
             this.Follow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Follow.Location = new System.Drawing.Point(707, 96);
+            this.Follow.Location = new System.Drawing.Point(943, 118);
+            this.Follow.Margin = new System.Windows.Forms.Padding(4);
             this.Follow.Name = "Follow";
-            this.Follow.Size = new System.Drawing.Size(65, 23);
+            this.Follow.Size = new System.Drawing.Size(87, 28);
             this.Follow.TabIndex = 8;
             this.Follow.Text = "Follow";
             this.SaveTooltip.SetToolTip(this.Follow, "Follows a user into their game.");
@@ -239,18 +250,20 @@ namespace RBX_Alt_Manager
             // 
             this.LabelUserID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelUserID.AutoSize = true;
-            this.LabelUserID.Location = new System.Drawing.Point(505, 101);
+            this.LabelUserID.Location = new System.Drawing.Point(673, 124);
+            this.LabelUserID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelUserID.Name = "LabelUserID";
-            this.LabelUserID.Size = new System.Drawing.Size(55, 13);
+            this.LabelUserID.Size = new System.Drawing.Size(70, 16);
             this.LabelUserID.TabIndex = 1000;
             this.LabelUserID.Text = "Username";
             // 
             // ServerList
             // 
             this.ServerList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ServerList.Location = new System.Drawing.Point(707, 67);
+            this.ServerList.Location = new System.Drawing.Point(943, 82);
+            this.ServerList.Margin = new System.Windows.Forms.Padding(4);
             this.ServerList.Name = "ServerList";
-            this.ServerList.Size = new System.Drawing.Size(65, 23);
+            this.ServerList.Size = new System.Drawing.Size(87, 28);
             this.ServerList.TabIndex = 6;
             this.ServerList.Text = "Utilities";
             this.SaveTooltip.SetToolTip(this.ServerList, "Contains Server List, Games List, and Favorites List");
@@ -259,6 +272,7 @@ namespace RBX_Alt_Manager
             // 
             // AccountsStrip
             // 
+            this.AccountsStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.AccountsStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addAccountsToolStripMenuItem,
             this.removeAccountToolStripMenuItem,
@@ -274,19 +288,19 @@ namespace RBX_Alt_Manager
             this.copyRbxplayerLinkToolStripMenuItem,
             this.copyAppLinkToolStripMenuItem});
             this.AccountsStrip.Name = "contextMenuStrip1";
-            this.AccountsStrip.Size = new System.Drawing.Size(209, 290);
+            this.AccountsStrip.Size = new System.Drawing.Size(246, 316);
             // 
             // addAccountsToolStripMenuItem
             // 
             this.addAccountsToolStripMenuItem.Name = "addAccountsToolStripMenuItem";
-            this.addAccountsToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.addAccountsToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.addAccountsToolStripMenuItem.Text = "Add Account";
             this.addAccountsToolStripMenuItem.Click += new System.EventHandler(this.addAccountsToolStripMenuItem_Click);
             // 
             // removeAccountToolStripMenuItem
             // 
             this.removeAccountToolStripMenuItem.Name = "removeAccountToolStripMenuItem";
-            this.removeAccountToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.removeAccountToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.removeAccountToolStripMenuItem.Text = "Remove Account";
             this.removeAccountToolStripMenuItem.Click += new System.EventHandler(this.removeAccountToolStripMenuItem_Click);
             // 
@@ -299,55 +313,55 @@ namespace RBX_Alt_Manager
             this.copyProfileToolStripMenuItem,
             this.copyUserIdToolStripMenuItem});
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.copyToolStripMenuItem.Text = "Copy";
             // 
             // copyUsernameToolStripMenuItem
             // 
             this.copyUsernameToolStripMenuItem.Name = "copyUsernameToolStripMenuItem";
-            this.copyUsernameToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.copyUsernameToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
             this.copyUsernameToolStripMenuItem.Text = "Copy Username";
             this.copyUsernameToolStripMenuItem.Click += new System.EventHandler(this.copyUsernameToolStripMenuItem_Click);
             // 
             // copyPasswordToolStripMenuItem
             // 
             this.copyPasswordToolStripMenuItem.Name = "copyPasswordToolStripMenuItem";
-            this.copyPasswordToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.copyPasswordToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
             this.copyPasswordToolStripMenuItem.Text = "Copy Password";
             this.copyPasswordToolStripMenuItem.Click += new System.EventHandler(this.copyPasswordToolStripMenuItem_Click);
             // 
             // copyUserPassComboToolStripMenuItem
             // 
             this.copyUserPassComboToolStripMenuItem.Name = "copyUserPassComboToolStripMenuItem";
-            this.copyUserPassComboToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.copyUserPassComboToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
             this.copyUserPassComboToolStripMenuItem.Text = "Copy User Pass Combo";
             this.copyUserPassComboToolStripMenuItem.Click += new System.EventHandler(this.copyUserPassComboToolStripMenuItem_Click);
             // 
             // copyProfileToolStripMenuItem
             // 
             this.copyProfileToolStripMenuItem.Name = "copyProfileToolStripMenuItem";
-            this.copyProfileToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.copyProfileToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
             this.copyProfileToolStripMenuItem.Text = "Copy Profile";
             this.copyProfileToolStripMenuItem.Click += new System.EventHandler(this.copyProfileToolStripMenuItem_Click);
             // 
             // copyUserIdToolStripMenuItem
             // 
             this.copyUserIdToolStripMenuItem.Name = "copyUserIdToolStripMenuItem";
-            this.copyUserIdToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.copyUserIdToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
             this.copyUserIdToolStripMenuItem.Text = "Copy UserId";
             this.copyUserIdToolStripMenuItem.Click += new System.EventHandler(this.copyUserIdToolStripMenuItem_Click);
             // 
             // sortAlphabeticallyToolStripMenuItem
             // 
             this.sortAlphabeticallyToolStripMenuItem.Name = "sortAlphabeticallyToolStripMenuItem";
-            this.sortAlphabeticallyToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.sortAlphabeticallyToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.sortAlphabeticallyToolStripMenuItem.Text = "Sort Alphabetically";
             this.sortAlphabeticallyToolStripMenuItem.Click += new System.EventHandler(this.sortAlphabeticallyToolStripMenuItem_Click);
             // 
             // quickLogInToolStripMenuItem
             // 
             this.quickLogInToolStripMenuItem.Name = "quickLogInToolStripMenuItem";
-            this.quickLogInToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.quickLogInToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.quickLogInToolStripMenuItem.Text = "Quick Log In";
             this.quickLogInToolStripMenuItem.Click += new System.EventHandler(this.quickLogInToolStripMenuItem_Click);
             // 
@@ -358,27 +372,27 @@ namespace RBX_Alt_Manager
             this.moveToToolStripMenuItem,
             this.copyGroupToolStripMenuItem});
             this.moveGroupUpToolStripMenuItem.Name = "moveGroupUpToolStripMenuItem";
-            this.moveGroupUpToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.moveGroupUpToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.moveGroupUpToolStripMenuItem.Text = "Groups";
             // 
             // toggleToolStripMenuItem
             // 
             this.toggleToolStripMenuItem.Name = "toggleToolStripMenuItem";
-            this.toggleToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.toggleToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.toggleToolStripMenuItem.Text = "Toggle";
             this.toggleToolStripMenuItem.Click += new System.EventHandler(this.toggleToolStripMenuItem_Click);
             // 
             // moveToToolStripMenuItem
             // 
             this.moveToToolStripMenuItem.Name = "moveToToolStripMenuItem";
-            this.moveToToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.moveToToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.moveToToolStripMenuItem.Text = "Move Account To";
             this.moveToToolStripMenuItem.Click += new System.EventHandler(this.moveToToolStripMenuItem_Click);
             // 
             // copyGroupToolStripMenuItem
             // 
             this.copyGroupToolStripMenuItem.Name = "copyGroupToolStripMenuItem";
-            this.copyGroupToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.copyGroupToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.copyGroupToolStripMenuItem.Text = "Copy Group";
             this.copyGroupToolStripMenuItem.Click += new System.EventHandler(this.copyGroupToolStripMenuItem_Click);
             // 
@@ -388,62 +402,62 @@ namespace RBX_Alt_Manager
             this.groupsToolStripMenuItem,
             this.infoToolStripMenuItem1});
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-            this.infoToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.infoToolStripMenuItem.Text = "Help";
             // 
             // groupsToolStripMenuItem
             // 
             this.groupsToolStripMenuItem.Name = "groupsToolStripMenuItem";
-            this.groupsToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.groupsToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
             this.groupsToolStripMenuItem.Text = "Groups";
             this.groupsToolStripMenuItem.Click += new System.EventHandler(this.groupsToolStripMenuItem_Click);
             // 
             // infoToolStripMenuItem1
             // 
             this.infoToolStripMenuItem1.Name = "infoToolStripMenuItem1";
-            this.infoToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+            this.infoToolStripMenuItem1.Size = new System.Drawing.Size(139, 26);
             this.infoToolStripMenuItem1.Text = "Info";
             this.infoToolStripMenuItem1.Click += new System.EventHandler(this.infoToolStripMenuItem1_Click);
             // 
             // viewFieldsToolStripMenuItem
             // 
             this.viewFieldsToolStripMenuItem.Name = "viewFieldsToolStripMenuItem";
-            this.viewFieldsToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.viewFieldsToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.viewFieldsToolStripMenuItem.Text = "View Fields";
             this.viewFieldsToolStripMenuItem.Click += new System.EventHandler(this.viewFieldsToolStripMenuItem_Click);
             // 
             // ShowDetailsToolStripMenuItem
             // 
             this.ShowDetailsToolStripMenuItem.Name = "ShowDetailsToolStripMenuItem";
-            this.ShowDetailsToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.ShowDetailsToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.ShowDetailsToolStripMenuItem.Text = "Dump Details";
             this.ShowDetailsToolStripMenuItem.Click += new System.EventHandler(this.ShowDetailsToolStripMenuItem_Click);
             // 
             // getAuthenticationTicketToolStripMenuItem
             // 
             this.getAuthenticationTicketToolStripMenuItem.Name = "getAuthenticationTicketToolStripMenuItem";
-            this.getAuthenticationTicketToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.getAuthenticationTicketToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.getAuthenticationTicketToolStripMenuItem.Text = "Get Authentication Ticket";
             this.getAuthenticationTicketToolStripMenuItem.Click += new System.EventHandler(this.getAuthenticationTicketToolStripMenuItem_Click);
             // 
             // copySecurityTokenToolStripMenuItem
             // 
             this.copySecurityTokenToolStripMenuItem.Name = "copySecurityTokenToolStripMenuItem";
-            this.copySecurityTokenToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.copySecurityTokenToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.copySecurityTokenToolStripMenuItem.Text = "Copy Security Token";
             this.copySecurityTokenToolStripMenuItem.Click += new System.EventHandler(this.copySecurityTokenToolStripMenuItem_Click);
             // 
             // copyRbxplayerLinkToolStripMenuItem
             // 
             this.copyRbxplayerLinkToolStripMenuItem.Name = "copyRbxplayerLinkToolStripMenuItem";
-            this.copyRbxplayerLinkToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.copyRbxplayerLinkToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.copyRbxplayerLinkToolStripMenuItem.Text = "Copy rbx-player Link";
             this.copyRbxplayerLinkToolStripMenuItem.Click += new System.EventHandler(this.copyRbxplayerLinkToolStripMenuItem_Click);
             // 
             // copyAppLinkToolStripMenuItem
             // 
             this.copyAppLinkToolStripMenuItem.Name = "copyAppLinkToolStripMenuItem";
-            this.copyAppLinkToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.copyAppLinkToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.copyAppLinkToolStripMenuItem.Text = "Copy App Link";
             this.copyAppLinkToolStripMenuItem.Click += new System.EventHandler(this.copyAppLinkToolStripMenuItem_Click);
             // 
@@ -451,20 +465,71 @@ namespace RBX_Alt_Manager
             // 
             this.HideUsernamesCheckbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.HideUsernamesCheckbox.AutoSize = true;
-            this.HideUsernamesCheckbox.Location = new System.Drawing.Point(215, 270);
+            this.HideUsernamesCheckbox.Location = new System.Drawing.Point(287, 333);
+            this.HideUsernamesCheckbox.Margin = new System.Windows.Forms.Padding(4);
             this.HideUsernamesCheckbox.Name = "HideUsernamesCheckbox";
-            this.HideUsernamesCheckbox.Size = new System.Drawing.Size(104, 17);
+            this.HideUsernamesCheckbox.Size = new System.Drawing.Size(131, 20);
             this.HideUsernamesCheckbox.TabIndex = 16;
             this.HideUsernamesCheckbox.Text = "Hide Usernames";
             this.HideUsernamesCheckbox.UseVisualStyleBackColor = true;
             this.HideUsernamesCheckbox.CheckedChanged += new System.EventHandler(this.HideUsernamesCheckbox_CheckedChanged);
             // 
+            // HbRestartCB
+            // 
+            this.HbRestartCB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.HbRestartCB.AutoSize = true;
+            this.HbRestartCB.Location = new System.Drawing.Point(699, 148);
+            this.HbRestartCB.Margin = new System.Windows.Forms.Padding(4);
+            this.HbRestartCB.Name = "HbRestartCB";
+            this.HbRestartCB.Size = new System.Drawing.Size(196, 20);
+            this.HbRestartCB.TabIndex = 1001;
+            this.HbRestartCB.Text = "Restart on heartbeat timeout";
+            this.HbRestartCB.UseVisualStyleBackColor = true;
+            this.HbRestartCB.CheckedChanged += new System.EventHandler(this.HbRestartCB_CheckedChanged);
+            // 
+            // HbTimeoutNum
+            // 
+            this.HbTimeoutNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.HbTimeoutNum.Location = new System.Drawing.Point(939, 143);
+            this.HbTimeoutNum.Margin = new System.Windows.Forms.Padding(4);
+            this.HbTimeoutNum.Maximum = new decimal(new int[] {
+            3600,
+            0,
+            0,
+            0});
+            this.HbTimeoutNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.HbTimeoutNum.Name = "HbTimeoutNum";
+            this.HbTimeoutNum.Size = new System.Drawing.Size(91, 22);
+            this.HbTimeoutNum.TabIndex = 1002;
+            this.HbTimeoutNum.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.HbTimeoutNum.ValueChanged += new System.EventHandler(this.HbTimeoutNum_ValueChanged);
+            // 
+            // HbTimeoutLabel
+            // 
+            this.HbTimeoutLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.HbTimeoutLabel.AutoSize = true;
+            this.HbTimeoutLabel.Location = new System.Drawing.Point(903, 145);
+            this.HbTimeoutLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.HbTimeoutLabel.Name = "HbTimeoutLabel";
+            this.HbTimeoutLabel.Size = new System.Drawing.Size(29, 16);
+            this.HbTimeoutLabel.TabIndex = 1003;
+            this.HbTimeoutLabel.Text = "sec";
+            // 
             // BrowserButton
             // 
             this.BrowserButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BrowserButton.Location = new System.Drawing.Point(639, 236);
+            this.BrowserButton.Location = new System.Drawing.Point(852, 338);
+            this.BrowserButton.Margin = new System.Windows.Forms.Padding(4);
             this.BrowserButton.Name = "BrowserButton";
-            this.BrowserButton.Size = new System.Drawing.Size(133, 23);
+            this.BrowserButton.Size = new System.Drawing.Size(177, 28);
             this.BrowserButton.TabIndex = 13;
             this.BrowserButton.Text = "Account Utilities";
             this.BrowserButton.UseVisualStyleBackColor = true;
@@ -473,9 +538,10 @@ namespace RBX_Alt_Manager
             // ArgumentsB
             // 
             this.ArgumentsB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ArgumentsB.Location = new System.Drawing.Point(691, 7);
+            this.ArgumentsB.Location = new System.Drawing.Point(921, 9);
+            this.ArgumentsB.Margin = new System.Windows.Forms.Padding(4);
             this.ArgumentsB.Name = "ArgumentsB";
-            this.ArgumentsB.Size = new System.Drawing.Size(23, 23);
+            this.ArgumentsB.Size = new System.Drawing.Size(31, 28);
             this.ArgumentsB.TabIndex = 5;
             this.ArgumentsB.Text = "A";
             this.ArgumentsB.UseVisualStyleBackColor = true;
@@ -486,9 +552,10 @@ namespace RBX_Alt_Manager
             // 
             this.CurrentPlace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CurrentPlace.AutoSize = true;
-            this.CurrentPlace.Location = new System.Drawing.Point(504, 12);
+            this.CurrentPlace.Location = new System.Drawing.Point(672, 15);
+            this.CurrentPlace.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CurrentPlace.Name = "CurrentPlace";
-            this.CurrentPlace.Size = new System.Drawing.Size(71, 13);
+            this.CurrentPlace.Size = new System.Drawing.Size(87, 16);
             this.CurrentPlace.TabIndex = 1000;
             this.CurrentPlace.Text = "Current Place";
             // 
@@ -496,9 +563,10 @@ namespace RBX_Alt_Manager
             // 
             this.LabelPlaceID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelPlaceID.AutoSize = true;
-            this.LabelPlaceID.Location = new System.Drawing.Point(504, 27);
+            this.LabelPlaceID.Location = new System.Drawing.Point(672, 33);
+            this.LabelPlaceID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabelPlaceID.Name = "LabelPlaceID";
-            this.LabelPlaceID.Size = new System.Drawing.Size(48, 13);
+            this.LabelPlaceID.Size = new System.Drawing.Size(58, 16);
             this.LabelPlaceID.TabIndex = 1000;
             this.LabelPlaceID.Text = "Place ID";
             // 
@@ -511,9 +579,10 @@ namespace RBX_Alt_Manager
             // 
             this.JoinDiscord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.JoinDiscord.Image = global::RBX_Alt_Manager.Properties.Resources.disc;
-            this.JoinDiscord.Location = new System.Drawing.Point(474, 266);
+            this.JoinDiscord.Location = new System.Drawing.Point(632, 375);
+            this.JoinDiscord.Margin = new System.Windows.Forms.Padding(4);
             this.JoinDiscord.Name = "JoinDiscord";
-            this.JoinDiscord.Size = new System.Drawing.Size(23, 23);
+            this.JoinDiscord.Size = new System.Drawing.Size(31, 28);
             this.JoinDiscord.TabIndex = 19;
             this.JoinDiscord.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.JoinDiscord.UseVisualStyleBackColor = true;
@@ -521,31 +590,32 @@ namespace RBX_Alt_Manager
             // 
             // OpenBrowserStrip
             // 
+            this.OpenBrowserStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.OpenBrowserStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.customURLToolStripMenuItem,
             this.URLJSToolStripMenuItem,
             this.joinGroupToolStripMenuItem});
             this.OpenBrowserStrip.Name = "OpenBrowserStrip";
-            this.OpenBrowserStrip.Size = new System.Drawing.Size(161, 70);
+            this.OpenBrowserStrip.Size = new System.Drawing.Size(187, 76);
             // 
             // customURLToolStripMenuItem
             // 
             this.customURLToolStripMenuItem.Name = "customURLToolStripMenuItem";
-            this.customURLToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.customURLToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
             this.customURLToolStripMenuItem.Text = "URL";
             this.customURLToolStripMenuItem.Click += new System.EventHandler(this.customURLToolStripMenuItem_Click);
             // 
             // URLJSToolStripMenuItem
             // 
             this.URLJSToolStripMenuItem.Name = "URLJSToolStripMenuItem";
-            this.URLJSToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.URLJSToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
             this.URLJSToolStripMenuItem.Text = "URL + Javascript";
             this.URLJSToolStripMenuItem.Click += new System.EventHandler(this.URLJSToolStripMenuItem_Click);
             // 
             // joinGroupToolStripMenuItem
             // 
             this.joinGroupToolStripMenuItem.Name = "joinGroupToolStripMenuItem";
-            this.joinGroupToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.joinGroupToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
             this.joinGroupToolStripMenuItem.Text = "Join Group";
             this.joinGroupToolStripMenuItem.Click += new System.EventHandler(this.joinGroupToolStripMenuItem_Click);
             // 
@@ -555,9 +625,10 @@ namespace RBX_Alt_Manager
             this.SaveToAccount.FlatAppearance.BorderSize = 0;
             this.SaveToAccount.Image = ((System.Drawing.Image)(resources.GetObject("SaveToAccount.Image")));
             this.SaveToAccount.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.SaveToAccount.Location = new System.Drawing.Point(750, 42);
+            this.SaveToAccount.Location = new System.Drawing.Point(1000, 52);
+            this.SaveToAccount.Margin = new System.Windows.Forms.Padding(4);
             this.SaveToAccount.Name = "SaveToAccount";
-            this.SaveToAccount.Size = new System.Drawing.Size(22, 22);
+            this.SaveToAccount.Size = new System.Drawing.Size(29, 27);
             this.SaveToAccount.TabIndex = 3;
             this.SaveTooltip.SetToolTip(this.SaveToAccount, "Saves the PlaceId + JobId to the selected account\r\nTo remove, clear out the text " +
         "boxes on the left and click Save");
@@ -573,9 +644,10 @@ namespace RBX_Alt_Manager
             this.ShuffleIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ShuffleIcon.BackColor = System.Drawing.Color.Transparent;
             this.ShuffleIcon.Image = global::RBX_Alt_Manager.Properties.Resources.ShuffleIcon;
-            this.ShuffleIcon.Location = new System.Drawing.Point(583, 45);
+            this.ShuffleIcon.Location = new System.Drawing.Point(777, 55);
+            this.ShuffleIcon.Margin = new System.Windows.Forms.Padding(4);
             this.ShuffleIcon.Name = "ShuffleIcon";
-            this.ShuffleIcon.Size = new System.Drawing.Size(18, 16);
+            this.ShuffleIcon.Size = new System.Drawing.Size(24, 20);
             this.ShuffleIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ShuffleIcon.TabIndex = 1004;
             this.ShuffleIcon.TabStop = false;
@@ -590,9 +662,10 @@ namespace RBX_Alt_Manager
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DefaultEncryptionButton.Cursor = System.Windows.Forms.Cursors.Help;
             this.DefaultEncryptionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DefaultEncryptionButton.Location = new System.Drawing.Point(3, 59);
+            this.DefaultEncryptionButton.Location = new System.Drawing.Point(4, 73);
+            this.DefaultEncryptionButton.Margin = new System.Windows.Forms.Padding(4);
             this.DefaultEncryptionButton.Name = "DefaultEncryptionButton";
-            this.DefaultEncryptionButton.Size = new System.Drawing.Size(474, 50);
+            this.DefaultEncryptionButton.Size = new System.Drawing.Size(632, 61);
             this.DefaultEncryptionButton.TabIndex = 3;
             this.DefaultEncryptionButton.Tag = "UseControlFont";
             this.DefaultEncryptionButton.Text = "Default Encryption";
@@ -608,9 +681,10 @@ namespace RBX_Alt_Manager
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordEncryptionButton.Cursor = System.Windows.Forms.Cursors.Help;
             this.PasswordEncryptionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PasswordEncryptionButton.Location = new System.Drawing.Point(3, 115);
+            this.PasswordEncryptionButton.Location = new System.Drawing.Point(4, 142);
+            this.PasswordEncryptionButton.Margin = new System.Windows.Forms.Padding(4);
             this.PasswordEncryptionButton.Name = "PasswordEncryptionButton";
-            this.PasswordEncryptionButton.Size = new System.Drawing.Size(474, 51);
+            this.PasswordEncryptionButton.Size = new System.Drawing.Size(632, 62);
             this.PasswordEncryptionButton.TabIndex = 5;
             this.PasswordEncryptionButton.Tag = "UseControlFont";
             this.PasswordEncryptionButton.Text = "Password Locked (Recommended)";
@@ -624,9 +698,10 @@ namespace RBX_Alt_Manager
             // 
             this.JobID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.JobID.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.JobID.Location = new System.Drawing.Point(602, 43);
+            this.JobID.Location = new System.Drawing.Point(803, 53);
+            this.JobID.Margin = new System.Windows.Forms.Padding(4);
             this.JobID.Name = "JobID";
-            this.JobID.Size = new System.Drawing.Size(143, 20);
+            this.JobID.Size = new System.Drawing.Size(189, 22);
             this.JobID.TabIndex = 2;
             this.SaveTooltip.SetToolTip(this.JobID, "Job ID is a unique ID assigned to every roblox server.\r\nYou may also put a Privat" +
         "e Server link in this box to join it.");
@@ -638,9 +713,10 @@ namespace RBX_Alt_Manager
             this.DonateButton.FlatAppearance.BorderSize = 0;
             this.DonateButton.Image = global::RBX_Alt_Manager.Properties.Resources.donation;
             this.DonateButton.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.DonateButton.Location = new System.Drawing.Point(750, 6);
+            this.DonateButton.Location = new System.Drawing.Point(1000, 7);
+            this.DonateButton.Margin = new System.Windows.Forms.Padding(4);
             this.DonateButton.Name = "DonateButton";
-            this.DonateButton.Size = new System.Drawing.Size(24, 24);
+            this.DonateButton.Size = new System.Drawing.Size(32, 30);
             this.DonateButton.TabIndex = 1001;
             this.DonateButton.UseVisualStyleBackColor = true;
             this.DonateButton.Click += new System.EventHandler(this.DonateButton_Click);
@@ -670,10 +746,11 @@ namespace RBX_Alt_Manager
             this.AccountsView.HideSelection = false;
             this.AccountsView.IsSimpleDragSource = true;
             this.AccountsView.IsSimpleDropSink = true;
-            this.AccountsView.Location = new System.Drawing.Point(13, 13);
+            this.AccountsView.Location = new System.Drawing.Point(17, 16);
+            this.AccountsView.Margin = new System.Windows.Forms.Padding(4);
             this.AccountsView.Name = "AccountsView";
             this.AccountsView.ShowSortIndicators = false;
-            this.AccountsView.Size = new System.Drawing.Size(485, 246);
+            this.AccountsView.Size = new System.Drawing.Size(645, 302);
             this.AccountsView.SortGroupItemsByPrimaryColumn = false;
             this.AccountsView.TabIndex = 20;
             this.AccountsView.UseCompatibleStateImageBehavior = false;
@@ -722,9 +799,10 @@ namespace RBX_Alt_Manager
             // EditTheme
             // 
             this.EditTheme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.EditTheme.Location = new System.Drawing.Point(503, 266);
+            this.EditTheme.Location = new System.Drawing.Point(671, 375);
+            this.EditTheme.Margin = new System.Windows.Forms.Padding(4);
             this.EditTheme.Name = "EditTheme";
-            this.EditTheme.Size = new System.Drawing.Size(133, 23);
+            this.EditTheme.Size = new System.Drawing.Size(177, 28);
             this.EditTheme.TabIndex = 13;
             this.EditTheme.Text = "Edit Theme";
             this.EditTheme.UseVisualStyleBackColor = true;
@@ -733,9 +811,10 @@ namespace RBX_Alt_Manager
             // LaunchNexus
             // 
             this.LaunchNexus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LaunchNexus.Location = new System.Drawing.Point(639, 266);
+            this.LaunchNexus.Location = new System.Drawing.Point(852, 375);
+            this.LaunchNexus.Margin = new System.Windows.Forms.Padding(4);
             this.LaunchNexus.Name = "LaunchNexus";
-            this.LaunchNexus.Size = new System.Drawing.Size(133, 23);
+            this.LaunchNexus.Size = new System.Drawing.Size(177, 28);
             this.LaunchNexus.TabIndex = 14;
             this.LaunchNexus.Text = "Account Control";
             this.LaunchNexus.UseVisualStyleBackColor = true;
@@ -747,9 +826,10 @@ namespace RBX_Alt_Manager
             this.ConfigButton.FlatAppearance.BorderSize = 0;
             this.ConfigButton.Image = global::RBX_Alt_Manager.Properties.Resources.configIcon;
             this.ConfigButton.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.ConfigButton.Location = new System.Drawing.Point(720, 6);
+            this.ConfigButton.Location = new System.Drawing.Point(960, 7);
+            this.ConfigButton.Margin = new System.Windows.Forms.Padding(4);
             this.ConfigButton.Name = "ConfigButton";
-            this.ConfigButton.Size = new System.Drawing.Size(24, 24);
+            this.ConfigButton.Size = new System.Drawing.Size(32, 30);
             this.ConfigButton.TabIndex = 1002;
             this.ConfigButton.UseVisualStyleBackColor = true;
             this.ConfigButton.Click += new System.EventHandler(this.ConfigButton_Click);
@@ -759,9 +839,10 @@ namespace RBX_Alt_Manager
             this.HistoryIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.HistoryIcon.BackColor = System.Drawing.Color.Transparent;
             this.HistoryIcon.Image = global::RBX_Alt_Manager.Properties.Resources.icons8_history_32;
-            this.HistoryIcon.Location = new System.Drawing.Point(583, 27);
+            this.HistoryIcon.Location = new System.Drawing.Point(777, 33);
+            this.HistoryIcon.Margin = new System.Windows.Forms.Padding(4);
             this.HistoryIcon.Name = "HistoryIcon";
-            this.HistoryIcon.Size = new System.Drawing.Size(16, 16);
+            this.HistoryIcon.Size = new System.Drawing.Size(21, 20);
             this.HistoryIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.HistoryIcon.TabIndex = 1003;
             this.HistoryIcon.TabStop = false;
@@ -772,9 +853,10 @@ namespace RBX_Alt_Manager
             this.PasswordPanel.Controls.Add(this.PasswordLayoutPanel);
             this.PasswordPanel.Controls.Add(this.PasswordSelectionPanel);
             this.PasswordPanel.Controls.Add(this.EncryptionSelectionPanel);
-            this.PasswordPanel.Location = new System.Drawing.Point(1200, 0);
+            this.PasswordPanel.Location = new System.Drawing.Point(1600, 0);
+            this.PasswordPanel.Margin = new System.Windows.Forms.Padding(4);
             this.PasswordPanel.Name = "PasswordPanel";
-            this.PasswordPanel.Size = new System.Drawing.Size(784, 301);
+            this.PasswordPanel.Size = new System.Drawing.Size(1045, 370);
             this.PasswordPanel.TabIndex = 1005;
             this.PasswordPanel.Visible = false;
             this.PasswordPanel.VisibleChanged += new System.EventHandler(this.PasswordPanel_VisibleChanged);
@@ -789,15 +871,16 @@ namespace RBX_Alt_Manager
             this.PasswordLayoutPanel.Controls.Add(this.PasswordTextBox, 0, 2);
             this.PasswordLayoutPanel.Controls.Add(this.AccessLabel, 0, 0);
             this.PasswordLayoutPanel.Controls.Add(this.PasswordRequiredLabel, 0, 1);
-            this.PasswordLayoutPanel.Location = new System.Drawing.Point(192, 85);
+            this.PasswordLayoutPanel.Location = new System.Drawing.Point(256, 105);
+            this.PasswordLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
             this.PasswordLayoutPanel.Name = "PasswordLayoutPanel";
             this.PasswordLayoutPanel.RowCount = 4;
             this.PasswordLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.PasswordLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.PasswordLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.PasswordLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.PasswordLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.PasswordLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.PasswordLayoutPanel.Size = new System.Drawing.Size(400, 130);
+            this.PasswordLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.PasswordLayoutPanel.Size = new System.Drawing.Size(533, 160);
             this.PasswordLayoutPanel.TabIndex = 5;
             // 
             // UnlockButton
@@ -806,9 +889,10 @@ namespace RBX_Alt_Manager
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UnlockButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UnlockButton.Location = new System.Drawing.Point(3, 92);
+            this.UnlockButton.Location = new System.Drawing.Point(4, 113);
+            this.UnlockButton.Margin = new System.Windows.Forms.Padding(4);
             this.UnlockButton.Name = "UnlockButton";
-            this.UnlockButton.Size = new System.Drawing.Size(394, 35);
+            this.UnlockButton.Size = new System.Drawing.Size(525, 43);
             this.UnlockButton.TabIndex = 3;
             this.UnlockButton.Tag = "UseControlFont";
             this.UnlockButton.Text = "Continue";
@@ -820,10 +904,11 @@ namespace RBX_Alt_Manager
             this.PasswordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PasswordTextBox.Location = new System.Drawing.Point(3, 67);
+            this.PasswordTextBox.Location = new System.Drawing.Point(4, 82);
+            this.PasswordTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.PasswordChar = '*';
-            this.PasswordTextBox.Size = new System.Drawing.Size(394, 20);
+            this.PasswordTextBox.Size = new System.Drawing.Size(525, 22);
             this.PasswordTextBox.TabIndex = 2;
             this.PasswordTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PasswordTextBox_KeyPress);
             // 
@@ -834,9 +919,10 @@ namespace RBX_Alt_Manager
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AccessLabel.AutoSize = true;
             this.AccessLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AccessLabel.Location = new System.Drawing.Point(3, 0);
+            this.AccessLabel.Location = new System.Drawing.Point(4, 0);
+            this.AccessLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AccessLabel.Name = "AccessLabel";
-            this.AccessLabel.Size = new System.Drawing.Size(394, 25);
+            this.AccessLabel.Size = new System.Drawing.Size(525, 31);
             this.AccessLabel.TabIndex = 1;
             this.AccessLabel.Tag = "UseControlFont";
             this.AccessLabel.Text = "Restricted Access";
@@ -849,9 +935,10 @@ namespace RBX_Alt_Manager
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordRequiredLabel.AutoSize = true;
             this.PasswordRequiredLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.PasswordRequiredLabel.Location = new System.Drawing.Point(3, 25);
+            this.PasswordRequiredLabel.Location = new System.Drawing.Point(4, 31);
+            this.PasswordRequiredLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PasswordRequiredLabel.Name = "PasswordRequiredLabel";
-            this.PasswordRequiredLabel.Size = new System.Drawing.Size(394, 39);
+            this.PasswordRequiredLabel.Size = new System.Drawing.Size(525, 47);
             this.PasswordRequiredLabel.TabIndex = 0;
             this.PasswordRequiredLabel.Tag = "UseControlFont";
             this.PasswordRequiredLabel.Text = "Please enter your password to continue";
@@ -866,13 +953,14 @@ namespace RBX_Alt_Manager
             this.PasswordSelectionPanel.Controls.Add(this.SetPasswordButton, 0, 2);
             this.PasswordSelectionPanel.Controls.Add(this.PasswordSelectionTB, 0, 1);
             this.PasswordSelectionPanel.Controls.Add(this.Password2Label, 0, 0);
-            this.PasswordSelectionPanel.Location = new System.Drawing.Point(242, 80);
+            this.PasswordSelectionPanel.Location = new System.Drawing.Point(323, 98);
+            this.PasswordSelectionPanel.Margin = new System.Windows.Forms.Padding(4);
             this.PasswordSelectionPanel.Name = "PasswordSelectionPanel";
             this.PasswordSelectionPanel.RowCount = 3;
             this.PasswordSelectionPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.PasswordSelectionPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.PasswordSelectionPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.PasswordSelectionPanel.Size = new System.Drawing.Size(300, 88);
+            this.PasswordSelectionPanel.Size = new System.Drawing.Size(400, 108);
             this.PasswordSelectionPanel.TabIndex = 6;
             // 
             // SetPasswordButton
@@ -882,9 +970,10 @@ namespace RBX_Alt_Manager
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SetPasswordButton.Enabled = false;
             this.SetPasswordButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SetPasswordButton.Location = new System.Drawing.Point(3, 51);
+            this.SetPasswordButton.Location = new System.Drawing.Point(4, 60);
+            this.SetPasswordButton.Margin = new System.Windows.Forms.Padding(4);
             this.SetPasswordButton.Name = "SetPasswordButton";
-            this.SetPasswordButton.Size = new System.Drawing.Size(294, 34);
+            this.SetPasswordButton.Size = new System.Drawing.Size(392, 44);
             this.SetPasswordButton.TabIndex = 3;
             this.SetPasswordButton.Tag = "UseControlFont";
             this.SetPasswordButton.Text = "Continue";
@@ -896,11 +985,12 @@ namespace RBX_Alt_Manager
             this.PasswordSelectionTB.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PasswordSelectionTB.Location = new System.Drawing.Point(3, 25);
+            this.PasswordSelectionTB.Location = new System.Drawing.Point(4, 30);
+            this.PasswordSelectionTB.Margin = new System.Windows.Forms.Padding(4);
             this.PasswordSelectionTB.Name = "PasswordSelectionTB";
             this.PasswordSelectionTB.PasswordChar = '*';
             this.PasswordSelectionTB.ShortcutsEnabled = false;
-            this.PasswordSelectionTB.Size = new System.Drawing.Size(294, 20);
+            this.PasswordSelectionTB.Size = new System.Drawing.Size(392, 22);
             this.PasswordSelectionTB.TabIndex = 2;
             this.PasswordSelectionTB.TextChanged += new System.EventHandler(this.PasswordSelectionTB_TextChanged);
             // 
@@ -911,9 +1001,10 @@ namespace RBX_Alt_Manager
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Password2Label.AutoSize = true;
             this.Password2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.Password2Label.Location = new System.Drawing.Point(3, 0);
+            this.Password2Label.Location = new System.Drawing.Point(4, 0);
+            this.Password2Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Password2Label.Name = "Password2Label";
-            this.Password2Label.Size = new System.Drawing.Size(294, 22);
+            this.Password2Label.Size = new System.Drawing.Size(392, 26);
             this.Password2Label.TabIndex = 0;
             this.Password2Label.Tag = "UseControlFont";
             this.Password2Label.Text = "Password";
@@ -928,13 +1019,14 @@ namespace RBX_Alt_Manager
             this.EncryptionSelectionPanel.Controls.Add(this.PasswordEncryptionButton, 0, 2);
             this.EncryptionSelectionPanel.Controls.Add(this.EncSelectionLabel, 0, 0);
             this.EncryptionSelectionPanel.Controls.Add(this.DefaultEncryptionButton, 0, 1);
-            this.EncryptionSelectionPanel.Location = new System.Drawing.Point(152, 65);
+            this.EncryptionSelectionPanel.Location = new System.Drawing.Point(203, 80);
+            this.EncryptionSelectionPanel.Margin = new System.Windows.Forms.Padding(4);
             this.EncryptionSelectionPanel.Name = "EncryptionSelectionPanel";
             this.EncryptionSelectionPanel.RowCount = 3;
             this.EncryptionSelectionPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.EncryptionSelectionPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.EncryptionSelectionPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.EncryptionSelectionPanel.Size = new System.Drawing.Size(480, 169);
+            this.EncryptionSelectionPanel.Size = new System.Drawing.Size(640, 208);
             this.EncryptionSelectionPanel.TabIndex = 6;
             this.EncryptionSelectionPanel.Visible = false;
             // 
@@ -945,9 +1037,10 @@ namespace RBX_Alt_Manager
             | System.Windows.Forms.AnchorStyles.Right)));
             this.EncSelectionLabel.AutoSize = true;
             this.EncSelectionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            this.EncSelectionLabel.Location = new System.Drawing.Point(3, 0);
+            this.EncSelectionLabel.Location = new System.Drawing.Point(4, 0);
+            this.EncSelectionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.EncSelectionLabel.Name = "EncSelectionLabel";
-            this.EncSelectionLabel.Size = new System.Drawing.Size(474, 56);
+            this.EncSelectionLabel.Size = new System.Drawing.Size(632, 69);
             this.EncSelectionLabel.TabIndex = 4;
             this.EncSelectionLabel.Tag = "UseControlFont";
             this.EncSelectionLabel.Text = "Please select how you want your data to be secured";
@@ -958,9 +1051,10 @@ namespace RBX_Alt_Manager
             this.DownloadProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DownloadProgressBar.BackColor = System.Drawing.SystemColors.MenuText;
             this.DownloadProgressBar.Cursor = System.Windows.Forms.Cursors.Help;
-            this.DownloadProgressBar.Location = new System.Drawing.Point(13, 277);
+            this.DownloadProgressBar.Location = new System.Drawing.Point(17, 341);
+            this.DownloadProgressBar.Margin = new System.Windows.Forms.Padding(4);
             this.DownloadProgressBar.Name = "DownloadProgressBar";
-            this.DownloadProgressBar.Size = new System.Drawing.Size(196, 11);
+            this.DownloadProgressBar.Size = new System.Drawing.Size(261, 14);
             this.DownloadProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.DownloadProgressBar.TabIndex = 7;
             this.DownloadProgressBar.Visible = false;
@@ -975,9 +1069,10 @@ namespace RBX_Alt_Manager
             this.DLChromiumLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DLChromiumLabel.AutoSize = true;
             this.DLChromiumLabel.Cursor = System.Windows.Forms.Cursors.Help;
-            this.DLChromiumLabel.Location = new System.Drawing.Point(49, 261);
+            this.DLChromiumLabel.Location = new System.Drawing.Point(65, 321);
+            this.DLChromiumLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.DLChromiumLabel.Name = "DLChromiumLabel";
-            this.DLChromiumLabel.Size = new System.Drawing.Size(127, 13);
+            this.DLChromiumLabel.Size = new System.Drawing.Size(158, 16);
             this.DLChromiumLabel.TabIndex = 1006;
             this.DLChromiumLabel.Text = "Downloading Chromium...";
             this.DLChromiumLabel.Visible = false;
@@ -986,10 +1081,11 @@ namespace RBX_Alt_Manager
             // Add
             // 
             this.Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Add.Location = new System.Drawing.Point(13, 266);
+            this.Add.Location = new System.Drawing.Point(17, 327);
+            this.Add.Margin = new System.Windows.Forms.Padding(4);
             this.Add.Menu = this.AddAccountsStrip;
             this.Add.Name = "Add";
-            this.Add.Size = new System.Drawing.Size(95, 23);
+            this.Add.Size = new System.Drawing.Size(127, 28);
             this.Add.TabIndex = 14;
             this.Add.Text = "Add Account";
             this.Add.UseVisualStyleBackColor = true;
@@ -998,10 +1094,11 @@ namespace RBX_Alt_Manager
             // OpenBrowser
             // 
             this.OpenBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.OpenBrowser.Location = new System.Drawing.Point(325, 266);
+            this.OpenBrowser.Location = new System.Drawing.Point(433, 327);
+            this.OpenBrowser.Margin = new System.Windows.Forms.Padding(4);
             this.OpenBrowser.Menu = this.OpenBrowserStrip;
             this.OpenBrowser.Name = "OpenBrowser";
-            this.OpenBrowser.Size = new System.Drawing.Size(143, 23);
+            this.OpenBrowser.Size = new System.Drawing.Size(191, 28);
             this.OpenBrowser.TabIndex = 18;
             this.OpenBrowser.Text = "Open Browser";
             this.OpenBrowser.UseVisualStyleBackColor = true;
@@ -1011,19 +1108,21 @@ namespace RBX_Alt_Manager
             // 
             this.UserID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.UserID.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.UserID.Location = new System.Drawing.Point(566, 98);
+            this.UserID.Location = new System.Drawing.Point(755, 121);
+            this.UserID.Margin = new System.Windows.Forms.Padding(4);
             this.UserID.Name = "UserID";
-            this.UserID.Size = new System.Drawing.Size(135, 20);
+            this.UserID.Size = new System.Drawing.Size(179, 22);
             this.UserID.TabIndex = 7;
             // 
             // Alias
             // 
             this.Alias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Alias.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.Alias.Location = new System.Drawing.Point(504, 124);
+            this.Alias.Location = new System.Drawing.Point(672, 178);
+            this.Alias.Margin = new System.Windows.Forms.Padding(4);
             this.Alias.MaxLength = 30;
             this.Alias.Name = "Alias";
-            this.Alias.Size = new System.Drawing.Size(197, 20);
+            this.Alias.Size = new System.Drawing.Size(261, 22);
             this.Alias.TabIndex = 9;
             this.Alias.Text = "Alias";
             // 
@@ -1031,9 +1130,10 @@ namespace RBX_Alt_Manager
             // 
             this.DescriptionBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DescriptionBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.DescriptionBox.Location = new System.Drawing.Point(504, 150);
+            this.DescriptionBox.Location = new System.Drawing.Point(672, 210);
+            this.DescriptionBox.Margin = new System.Windows.Forms.Padding(4);
             this.DescriptionBox.Name = "DescriptionBox";
-            this.DescriptionBox.Size = new System.Drawing.Size(268, 80);
+            this.DescriptionBox.Size = new System.Drawing.Size(356, 98);
             this.DescriptionBox.TabIndex = 11;
             this.DescriptionBox.Text = "Description";
             // 
@@ -1041,9 +1141,10 @@ namespace RBX_Alt_Manager
             // 
             this.PlaceID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.PlaceID.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.PlaceID.Location = new System.Drawing.Point(504, 43);
+            this.PlaceID.Location = new System.Drawing.Point(672, 53);
+            this.PlaceID.Margin = new System.Windows.Forms.Padding(4);
             this.PlaceID.Name = "PlaceID";
-            this.PlaceID.Size = new System.Drawing.Size(78, 20);
+            this.PlaceID.Size = new System.Drawing.Size(103, 22);
             this.PlaceID.TabIndex = 1;
             this.PlaceID.Text = "5315046213";
             this.PlaceID.Click += new System.EventHandler(this.PlaceID_Click);
@@ -1052,9 +1153,9 @@ namespace RBX_Alt_Manager
             // AccountManager
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 301);
+            this.ClientSize = new System.Drawing.Size(1045, 418);
             this.Controls.Add(this.Remove);
             this.Controls.Add(this.Add);
             this.Controls.Add(this.DLChromiumLabel);
@@ -1064,6 +1165,9 @@ namespace RBX_Alt_Manager
             this.Controls.Add(this.LaunchNexus);
             this.Controls.Add(this.DonateButton);
             this.Controls.Add(this.EditTheme);
+            this.Controls.Add(this.HbTimeoutNum);
+            this.Controls.Add(this.HbTimeoutLabel);
+            this.Controls.Add(this.HbRestartCB);
             this.Controls.Add(this.SaveToAccount);
             this.Controls.Add(this.OpenBrowser);
             this.Controls.Add(this.JoinDiscord);
@@ -1089,8 +1193,9 @@ namespace RBX_Alt_Manager
             this.Controls.Add(this.DownloadProgressBar);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(800, 340);
+            this.MinimumSize = new System.Drawing.Size(1061, 457);
             this.Name = "AccountManager";
             this.Text = "Roblox Account Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccountManager_FormClosing);
@@ -1098,6 +1203,7 @@ namespace RBX_Alt_Manager
             this.Shown += new System.EventHandler(this.AccountManager_Shown);
             this.AddAccountsStrip.ResumeLayout(false);
             this.AccountsStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.HbTimeoutNum)).EndInit();
             this.OpenBrowserStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ShuffleIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AccountsView)).EndInit();
@@ -1134,6 +1240,9 @@ namespace RBX_Alt_Manager
         private System.Windows.Forms.ToolStripMenuItem removeAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
         private System.Windows.Forms.CheckBox HideUsernamesCheckbox;
+        private System.Windows.Forms.CheckBox HbRestartCB;
+        private System.Windows.Forms.NumericUpDown HbTimeoutNum;
+        private System.Windows.Forms.Label HbTimeoutLabel;
         private System.Windows.Forms.ToolStripMenuItem getAuthenticationTicketToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyRbxplayerLinkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyUsernameToolStripMenuItem;

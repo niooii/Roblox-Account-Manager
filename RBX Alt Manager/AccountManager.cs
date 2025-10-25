@@ -50,6 +50,9 @@ namespace RBX_Alt_Manager
         public static RestClient AccountClient;
         public static RestClient GameJoinClient;
         public static RestClient Web13Client;
+        // heartbeat stuff
+        public static Dictionary<string, long> userToPid = new Dictionary<string, long>();
+
         public static string CurrentPlaceId { get => Instance.PlaceID.Text; }
         public static string CurrentJobId { get => Instance.JobID.Text; }
         private ArgumentsForm afform;
@@ -1441,6 +1444,12 @@ namespace RBX_Alt_Manager
 
             if (!string.IsNullOrEmpty(SelectedAccount.GetField("SavedPlaceId"))) PlaceID.Text = SelectedAccount.GetField("SavedPlaceId");
             if (!string.IsNullOrEmpty(SelectedAccount.GetField("SavedJobId"))) JobID.Text = SelectedAccount.GetField("SavedJobId");
+
+            HbRestartCB.Checked = SelectedAccount.GetField("HbRestart") == "true";
+            if (decimal.TryParse(SelectedAccount.GetField("HbTimeout"), out decimal timeout))
+                HbTimeoutNum.Value = timeout;
+            else
+                HbTimeoutNum.Value = 30;
         }
 
         private void SetAlias_Click(object sender, EventArgs e)
@@ -2178,6 +2187,18 @@ namespace RBX_Alt_Manager
         private void PlaceID_Click( object sender, EventArgs e )
         {
             PlaceID.SelectAll(); // Allows quick replacing of the PlaceID with a click and ctrl-v.
+        }
+
+        private void HbRestartCB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SelectedAccount == null) return;
+            SelectedAccount.SetField("HbRestart", HbRestartCB.Checked ? "true" : "false");
+        }
+
+        private void HbTimeoutNum_ValueChanged(object sender, EventArgs e)
+        {
+            if (SelectedAccount == null) return;
+            SelectedAccount.SetField("HbTimeout", HbTimeoutNum.Value.ToString());
         }
     }
 }

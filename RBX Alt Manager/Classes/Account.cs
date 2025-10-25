@@ -115,7 +115,12 @@ namespace RBX_Alt_Manager
 
             if (!GetCSRFToken(out string Token)) return false;
 
-            RestRequest request = MakeRequest("/v1/authentication-ticket/", Method.Post).AddHeader("X-CSRF-TOKEN", Token).AddHeader("Referer", "https://www.roblox.com/games/4924922222/Brookhaven-RP");
+            RestRequest request = MakeRequest("/v1/authentication-ticket/", Method.Post)
+                .AddHeader("User-Agent", "Roblox/WinInet")
+                .AddHeader("Referer", "https://www.roblox.com/develop")
+                .AddHeader("RBX-For-Gameauth", "true")
+                .AddHeader("Content-Type", "application/json")
+                .AddHeader("X-CSRF-TOKEN", Token);
 
             RestResponse response = AccountManager.AuthClient.Execute(request);
 
@@ -657,6 +662,15 @@ namespace RBX_Alt_Manager
                             Process Launcher = Process.Start(LaunchInfo);
                             
                             Launcher.WaitForExit();
+
+                            Task.Run(() =>
+                            {
+                                Task.Delay(5000);
+                                for (int i = 0; i < 10; i++)
+                                {
+
+                                }
+                            });
 
                             AccountManager.Instance.NextAccount();
 
