@@ -72,6 +72,8 @@ namespace RBX_Alt_Manager
         private WebServer AltManagerWS;
         private string WSPassword { get; set; }
         public System.Timers.Timer AutoCookieRefresh { get; private set; }
+        public static HeartbeatServer HbServer { get; private set; }
+        public static System.Timers.Timer HbCheckTimer { get; private set; }
 
         public static IniFile IniSettings;
         public static IniSection General;
@@ -84,6 +86,8 @@ namespace RBX_Alt_Manager
         private static Mutex rbxMultiMutex;
         private readonly static object saveLock = new object();
         private readonly static object rgSaveLock = new object();
+        private readonly static object heartbeatRestartLock = new object();
+        private static readonly HashSet<string> accountsRestarting = new HashSet<string>();
         public event EventHandler<GameArgs> RecentGameAdded;
 
         private bool IsResettingPassword;
@@ -820,6 +824,184 @@ namespace RBX_Alt_Manager
 
             var PresenceTimer = new System.Timers.Timer(60000 * 2) { Enabled = true };
             PresenceTimer.Elapsed += (s, e) => AccountsView.InvokeIfRequired(async () => await UpdatePresence());
+
+            try
+            {
+                HbServer = new HeartbeatServer();
+                HbServer.Start();
+
+                HbCheckTimer = new System.Timers.Timer(500) { Enabled = true };
+                HbCheckTimer.Elapsed += CheckHeartbeatTimeouts;
+
+                Program.Logger.Info("Heartbeat monitoring system initialized");
+            }
+            catch (Exception ex)
+            {
+                Program.Logger.Error($"Failed to initialize heartbeat server: {ex}");
+                MessageBox.Show($"Failed to initialize heartbeat server: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private static void CheckHeartbeatTimeouts(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            // poll accounts
+            try
+            {
+                if (HbServer == null) return;
+
+                foreach (var account in AccountsList.Where(a =>
+                    a.GetField("HbRestart") == "true" &&
+                    !string.IsNullOrEmpty(a.BrowserTrackerID) &&
+                    HeartbeatServer.LastHeartbeat.ContainsKey(a.Username)))
+                {
+                    if (!int.TryParse(account.GetField("HbTimeout"), out int timeoutSeconds))
+                        timeoutSeconds = 60; // Default timeout
+
+                    DateTime lastHeartbeat;
+                    if (HeartbeatServer.LastHeartbeat.TryGetValue(account.Username, out lastHeartbeat))
+                    {
+                        if ((DateTime.Now - lastHeartbeat).TotalSeconds > timeoutSeconds)
+                        {
+                            Task.Run(async () =>
+                            {
+                                await RestartAccountOnTimeout(account);
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Program.Logger.Error($"Error checking heartbeat timeouts: {ex}");
+            }
+        }
+
+        private static async Task RestartAccountOnTimeout(Account account)
+        {
+            // Prevent multiple simultaneous restarts for the same account
+            lock (heartbeatRestartLock)
+            {
+                if (accountsRestarting.Contains(account.Username))
+                {
+                    Program.Logger.Debug($"Already restarting {account.Username}, skipping duplicate timeout");
+                    return;
+                }
+                accountsRestarting.Add(account.Username);
+            }
+
+            try
+            {
+                Program.Logger.Info($"Heartbeat timeout detected for {account.Username}, restarting process...");
+
+                // reset immediately
+                HeartbeatServer.LastHeartbeat.AddOrUpdate(account.Username, DateTime.Now, (key, oldValue) => DateTime.Now);
+                Program.Logger.Info($"Reset heartbeat timer for {account.Username} to prevent restart loop");
+
+                string oldTrackerID = account.BrowserTrackerID;
+
+                // kill the old account
+                try
+                {
+                    int killedCount = 0;
+
+                    foreach (Process proc in Process.GetProcessesByName("RobloxPlayerBeta"))
+                    {
+                        try
+                        {
+                            string TrackerID = "";
+                            try
+                            {
+                                var cmdLine = proc.GetCommandLine();
+                                var TrackerMatch = Regex.Match(cmdLine, @"browsertrackerid[:\+](\d+)");
+                                TrackerID = TrackerMatch.Success ? TrackerMatch.Groups[1].Value : string.Empty;
+                            }
+                            catch
+                            {
+                                continue;
+                            }
+
+                            if (!string.IsNullOrEmpty(oldTrackerID) && TrackerID == oldTrackerID)
+                            {
+                                Program.Logger.Info($"Killing Roblox process {proc.Id} for account {account.Username} (TrackerID: {TrackerID})");
+                                try
+                                {
+                                    proc.Kill();
+                                    killedCount++;
+                                }
+                                catch (Exception killEx)
+                                {
+                                    Program.Logger.Error($"Failed to kill process {proc.Id}: {killEx.Message}");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Program.Logger.Warn($"Error checking process {proc.Id}: {ex.Message}");
+                        }
+                    }
+
+                    if (killedCount > 0)
+                    {
+                        Program.Logger.Info($"Killed {killedCount} Roblox process(es) for {account.Username}");
+                    }
+                    else
+                    {
+                        Program.Logger.Warn($"No Roblox processes found with TrackerID {oldTrackerID} for {account.Username}");
+                    }
+
+                    // wait a bit for the old process to terminate
+                    await Task.Delay(1000);
+                }
+                catch (Exception ex)
+                {
+                    Program.Logger.Error($"Error killing process for {account.Username}: {ex}");
+                }
+
+                // Get place ID from GUI
+                if (!long.TryParse(Instance.PlaceID.Text, out long placeId))
+                {
+                    Program.Logger.Error($"Invalid place ID in GUI: {Instance.PlaceID.Text}");
+                    Instance.InvokeIfRequired(() =>
+                        MessageBox.Show($"Invalid place ID: {Instance.PlaceID.Text}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error));
+                    return;
+                }
+
+                Instance.InvokeIfRequired(async () =>
+                {
+                    try
+                    {
+                        string result = await account.JoinServer(placeId, Instance.JobID.Text, false, false);
+                        if (!result.Contains("Success"))
+                        {
+                            Program.Logger.Error($"Failed to restart {account.Username}: {result}");
+                            MessageBox.Show($"Failed to restart {account.Username}: {result}", "Restart Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            Program.Logger.Info($"Successfully restarted {account.Username} after heartbeat timeout");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Program.Logger.Error($"Error restarting {account.Username}: {ex}");
+                        MessageBox.Show($"Error restarting {account.Username}: {ex.Message}", "Restart Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Program.Logger.Error($"Error in RestartAccountOnTimeout for {account.Username}: {ex}");
+                Instance.InvokeIfRequired(() =>
+                    MessageBox.Show($"Error restarting {account.Username}: {ex.Message}", "Restart Error", MessageBoxButtons.OK, MessageBoxIcon.Error));
+            }
+            finally
+            {
+                // removes from restarting set to allow future restarts
+                lock (heartbeatRestartLock)
+                {
+                    accountsRestarting.Remove(account.Username);
+                }
+            }
         }
 
         public void ApplyTheme()
@@ -1607,6 +1789,18 @@ namespace RBX_Alt_Manager
             }
 
             AltManagerWS?.Stop();
+
+            // Cleanup heartbeat server
+            try
+            {
+                HbCheckTimer?.Stop();
+                HbCheckTimer?.Dispose();
+                HbServer?.Stop();
+            }
+            catch (Exception ex)
+            {
+                Program.Logger.Error($"Error stopping heartbeat server: {ex}");
+            }
 
             if (PlaceID == null || string.IsNullOrEmpty(PlaceID.Text)) return;
 

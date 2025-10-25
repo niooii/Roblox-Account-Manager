@@ -505,6 +505,7 @@
       <DependentUpon>ServerList.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\WebServer.cs" />
+    <Compile Include="Classes\HeartbeatServer.cs" />
     <EmbeddedResource Include="Classes\AvatarControl.resx">
       <DependentUpon>AvatarControl.cs</DependentUpon>
     </EmbeddedResource>

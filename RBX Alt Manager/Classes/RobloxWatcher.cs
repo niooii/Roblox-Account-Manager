@@ -88,7 +88,7 @@ namespace RBX_Alt_Manager.Classes
 
                 if (RememberWindowPositions && (DateTime.Now - process.StartTime).TotalSeconds > 30)
                 {
-                    var TrackerMatch = Regex.Match(CommandLine, @"\-b (\d+)");
+                    var TrackerMatch = Regex.Match(CommandLine, @"browsertrackerid[:\+](\d+)");
                     string TrackerID = TrackerMatch.Success ? TrackerMatch.Groups[1].Value : string.Empty;
 
                     if (AccountManager.AccountsList.FirstOrDefault(Account => Account.BrowserTrackerID == TrackerID) is Account account)

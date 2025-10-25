@@ -516,6 +516,9 @@ namespace RBX_Alt_Manager
                 BrowserTrackerID = r.Next(100000, 175000).ToString() + r.Next(100000, 900000).ToString(); // oh god this is ugly
             }
 
+            // Register for heartbeat monitoring immediately when JoinServer is called
+            RegisterHeartbeatMonitoring();
+
             try { ClientSettingsPatcher.PatchSettings(); } catch (Exception Ex) { Program.Logger.Error($"Failed to patch ClientAppSettings: {Ex}"); }
 
             if (!GetCSRFToken(out string Token)) return $"ERROR: Account Session Expired, re-add the account or try again. (Invalid X-CSRF-Token)\n{Token}";
@@ -531,20 +534,31 @@ namespace RBX_Alt_Manager
                     {
                         foreach(Process proc in Process.GetProcessesByName("RobloxPlayerBeta"))
                         {
-                            var TrackerMatch = Regex.Match(proc.GetCommandLine(), @"\-b (\d+)");
-                            string TrackerID = TrackerMatch.Success ? TrackerMatch.Groups[1].Value : string.Empty;
-
-                            if (TrackerID == BrowserTrackerID)
+                            try
                             {
-                                try // ignore ObjectDisposedExceptions
+                                var cmdLine = proc.GetCommandLine();
+                                var TrackerMatch = Regex.Match(cmdLine, @"browsertrackerid[:\+](\d+)");
+                                string TrackerID = TrackerMatch.Success ? TrackerMatch.Groups[1].Value : string.Empty;
+
+                                if (TrackerID == BrowserTrackerID)
                                 {
-                                    proc.CloseMainWindow();
-                                    await Task.Delay(250);
-                                    proc.CloseMainWindow(); // Allows Roblox to disconnect from the server so we don't get the "Same account launched" error
-                                    await Task.Delay(250);
-                                    proc.Kill();
+                                    try // ignore ObjectDisposedExceptions
+                                    {
+                                        proc.CloseMainWindow();
+                                        await Task.Delay(250);
+                                        proc.CloseMainWindow(); // Allows Roblox to disconnect from the server so we don't get the "Same account launched" error
+                                        await Task.Delay(250);
+                                        proc.Kill();
+                                    }
+                                    catch { }
                                 }
-                                catch { }
+                            }
+                            catch (Exception cmdEx)
+                            {
+                                // WMI service might be disabled, skip process identification for this process
+                                Program.Logger.Warn($"Could not get command line for process {proc.Id}: {cmdEx.Message}");
+                                // As a fallback, we could try to close all Roblox processes if we can't identify them specifically
+                                // For now, we'll just skip this process
                             }
                         }
                     }
@@ -703,7 +717,7 @@ namespace RBX_Alt_Manager
 
                     string CommandLine = process.GetCommandLine();
 
-                    var TrackerMatch = Regex.Match(CommandLine, @"\-b (\d+)");
+                    var TrackerMatch = Regex.Match(CommandLine, @"browsertrackerid[:\+](\d+)");
                     string TrackerID = TrackerMatch.Success ? TrackerMatch.Groups[1].Value : string.Empty;
 
                     if (TrackerID != BrowserTrackerID) continue;
@@ -833,6 +847,22 @@ namespace RBX_Alt_Manager
         public string GetField(string Name) => Fields.ContainsKey(Name) ? Fields[Name] : string.Empty;
         public void SetField(string Name, string Value) { Fields[Name] = Value; AccountManager.SaveAccounts(); }
         public void RemoveField(string Name) { Fields.Remove(Name); AccountManager.SaveAccounts(); }
+
+        private void RegisterHeartbeatMonitoring()
+        {
+            try
+            {
+                if (GetField("HbRestart") == "true")
+                {
+                    HeartbeatServer.LastHeartbeat.AddOrUpdate(Username, DateTime.Now, (key, oldValue) => DateTime.Now);
+                    Program.Logger.Info($"Registered {Username} for heartbeat monitoring with timeout of {GetField("HbTimeout")} seconds");
+                }
+            }
+            catch (Exception ex)
+            {
+                Program.Logger.Error($"Error registering heartbeat monitoring for {Username}: {ex}");
+            }
+        }
     }
 
     public class AccountJson
