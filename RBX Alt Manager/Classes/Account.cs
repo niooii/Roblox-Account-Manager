@@ -663,15 +663,6 @@ namespace RBX_Alt_Manager
                             
                             Launcher.WaitForExit();
 
-                            Task.Run(() =>
-                            {
-                                Task.Delay(5000);
-                                for (int i = 0; i < 10; i++)
-                                {
-
-                                }
-                            });
-
                             AccountManager.Instance.NextAccount();
 
                             _ = Task.Run(AdjustWindowPosition);

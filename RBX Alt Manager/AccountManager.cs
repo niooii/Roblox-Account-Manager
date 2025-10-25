@@ -50,8 +50,6 @@ namespace RBX_Alt_Manager
         public static RestClient AccountClient;
         public static RestClient GameJoinClient;
         public static RestClient Web13Client;
-        // heartbeat stuff
-        public static Dictionary<string, long> userToPid = new Dictionary<string, long>();
 
         public static string CurrentPlaceId { get => Instance.PlaceID.Text; }
         public static string CurrentJobId { get => Instance.JobID.Text; }
